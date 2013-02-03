@@ -59,7 +59,7 @@ define(['jquery', 'lodash'], function($, _) {
 		
 		// the main module deferred object should resolve itself
 		_q.resolve();
-		
+				
 		return _q.promise();
 	}
 
@@ -74,11 +74,14 @@ define(['jquery', 'lodash'], function($, _) {
 				// turn `arguments` into true array
 		var args = Array.prototype.slice.call(arguments),
 				// get command string and remove from args
-				command = args.shift();
-				
+				command = args.shift()[0];
+
 		// call the command if it exists	
-		if(_.isFunction(_cmds[command]) return _cmds[command].apply(this, args);
-		else throw new Error("Command '"+input+"' does not exist.");		
+		if(_.isFunction(_cmds[command])) {
+			return _cmds[command].apply(this, args);
+		} else {
+			throw new Error("Command '"+command+"' does not exist.");	
+		}	
 	}
 	
 	
@@ -91,10 +94,10 @@ define(['jquery', 'lodash'], function($, _) {
 	 * @param {object|string} [input] an object containing module init options, or a string for command name
 	 */
 	function _facade(input) {	
-		// if the first item is an object we are initializing the module
-		if(_.isObject(input)) _initModule(arguments);
+		// if the first item is an object or is empty we are initializing the module
+		if(_.isObject(input) || _.isUndefined(input)) return _initModule(arguments);
 		// if first item is a string we are calling a command.		
-		} else if(_.isString(input)) _invokeCommand(arguments)
+		else if(_.isString(input))  return _invokeCommand(arguments)
 	};
 	
 	return _facade;

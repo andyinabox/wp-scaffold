@@ -25,12 +25,12 @@
 <!-- XHTML Friends Network http://gmpg.org/xfn/ -->
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 
-
+<!-- holla back-->
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
 <!-- sourcery -->
 <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-<script src="js/libs/require.js" data-main="js/main"></script>
+<script data-main="<?php echo get_template_directory_uri(); ?>/js/main" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.4/require.min.js"></script>
 <!-- /sourcery -->
 
 
